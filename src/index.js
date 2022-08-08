@@ -4,7 +4,7 @@ require('dotenv/config');
 const express = require('express');
 const { connect } = require('mongoose');
 const cors = require('cors');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const appRouter = require('./router');
 const errorHandlerMiddleware = require('./middleware/error');
