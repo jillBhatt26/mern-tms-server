@@ -43,7 +43,7 @@ connect(DB_URL)
     .then(() => {
         app.listen(PORT, HOST, err => {
             if (err) throw err;
-            else console.log(`App hosted on: ${HOST}:${PORT}`);
+            else console.log(`🚀...Server live on: ${HOST}:${PORT}...🚀`);
         });
     })
     .catch(err => {
