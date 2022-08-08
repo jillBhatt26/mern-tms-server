@@ -58,13 +58,13 @@ const create = async (req, res, next) => {
             role
         });
 
-        const token = await createToken(user._id);
+        // const token = await createToken(user._id);
 
-        // send a cookie with the value of token in it
-        res.cookie('tms_token', token, {
-            httpOnly: true,
-            maxAge: 1 * 24 * 60 * 60 * 100
-        });
+        // // send a cookie with the value of token in it
+        // res.cookie('tms_token', token, {
+        //     httpOnly: true,
+        //     maxAge: 1 * 24 * 60 * 60 * 100
+        // });
 
         res.status(201).json({
             success: true,
@@ -136,7 +136,8 @@ const login = async (req, res, next) => {
 
         res.cookie('tms_token', token, {
             httpOnly: true,
-            maxAge: 3 * 24 * 60 * 60 * 100
+            maxAge: 3 * 24 * 60 * 60 * 100,
+            domain: 'mern-tms.netlify.app'
         });
 
         res.status(200).json({
