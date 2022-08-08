@@ -32,7 +32,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // cookie parser middleware
-app.use(cookieParser());
+app.use(
+    cookieParser({
+        secret: 'shhhhhhh!!',
+        secureProxy: true
+    })
+);
 
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
