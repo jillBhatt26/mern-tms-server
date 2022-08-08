@@ -27,6 +27,19 @@ app.use(
     })
 );
 
+// session
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+        resave: true,
+        saveUninitialized: false,
+        cookie: {
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+            secure: process.env.NODE_ENV === 'production' // must be true if sameSite='none'
+        }
+    })
+);
+
 // url parsing setup middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
