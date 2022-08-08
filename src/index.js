@@ -5,7 +5,7 @@ const express = require('express');
 const { connect } = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+// const session = require('express-session');
 const appRouter = require('./router');
 const errorHandlerMiddleware = require('./middleware/error');
 const config = require('./config/env');
@@ -33,27 +33,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // cookie parser middleware
-app.use(
-    cookieParser({
-        secret: 'shhhhhhh!!',
-        secureProxy: true,
-        sameSite: 'none',
-        secure: true
-    })
-);
+app.use(cookieParser());
 
 // session
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
-        resave: true,
-        saveUninitialized: false,
-        cookie: {
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-            secure: process.env.NODE_ENV === 'production' // must be true if sameSite='none'
-        }
-    })
-);
+// app.use(
+//     session({
+//         secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+//         resave: true,
+//         saveUninitialized: false,
+//         cookie: {
+//             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+//             secure: process.env.NODE_ENV === 'production' // must be true if sameSite='none'
+//         }
+//     })
+// );
 
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
