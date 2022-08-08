@@ -146,7 +146,9 @@ const login = async (req, res, next) => {
                 id: toLoginUser._id,
                 name: toLoginUser.name,
                 email: toLoginUser.email,
-                role: toLoginUser.role
+                role: toLoginUser.role,
+                secure: true,
+                sameSite: 'none'
             }
         });
     } catch (error) {
