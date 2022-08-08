@@ -45,6 +45,10 @@ connect(DB_URL)
         console.log(`Error connecting to mongodb: ${err.message}`);
     });
 
+app.get('/', (req, res) => {
+    return res.status(200).json({ msg: 'Welcome!!' });
+});
+
 app.use(appRouter);
 
 app.use(errorHandlerMiddleware);
