@@ -4,10 +4,10 @@ const User = require('../../modules/user/user.model');
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.tms_token;
 
+    console.log('process.env.JWT_SECRET: ', process.env.JWT_SECRET);
+
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
         if (err) {
-            console.log('jwt verify error: ', err);
-
             return next({
                 status: 500,
                 message: err.message || 'Failed to authorize user!'
