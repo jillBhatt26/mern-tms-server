@@ -15,6 +15,8 @@ const config = require('./config/env');
 // init app
 const app = express();
 
+app.set('trust proxy', 1);
+
 // cors middleware
 app.use(
     cors({
