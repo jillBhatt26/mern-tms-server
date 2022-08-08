@@ -36,14 +36,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const PORT = config.PORT;
-const HOST = config.HOST;
 const DB_URL = config.DB_URL;
 
 connect(DB_URL)
     .then(() => {
-        app.listen(PORT, HOST, err => {
+        app.listen(PORT, err => {
             if (err) throw err;
-            else console.log(`🚀...Server live on: ${HOST}:${PORT}...🚀`);
+            else console.log(`🚀...Server live...`);
         });
     })
     .catch(err => {
