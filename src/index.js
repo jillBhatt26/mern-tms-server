@@ -5,7 +5,6 @@ const express = require('express');
 const { connect } = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-// const session = require('express-session');
 const appRouter = require('./router');
 const errorHandlerMiddleware = require('./middleware/error');
 const config = require('./config/env');
@@ -16,7 +15,8 @@ const config = require('./config/env');
 // init app
 const app = express();
 
-// app.set('trust proxy', 1);
+// cookie parser middleware
+app.use(cookieParser());
 
 // cors middleware
 app.use(
@@ -31,22 +31,6 @@ app.use(
 // url parsing setup middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// cookie parser middleware
-app.use(cookieParser());
-
-// session
-// app.use(
-//     session({
-//         secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
-//         resave: true,
-//         saveUninitialized: false,
-//         cookie: {
-//             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-//             secure: process.env.NODE_ENV === 'production' // must be true if sameSite='none'
-//         }
-//     })
-// );
 
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
