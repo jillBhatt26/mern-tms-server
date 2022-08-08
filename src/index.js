@@ -36,7 +36,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
     cookieParser({
         secret: 'shhhhhhh!!',
-        secureProxy: true
+        secureProxy: true,
+        sameSite: 'none',
+        secure: true
     })
 );
 
