@@ -137,9 +137,7 @@ const login = async (req, res, next) => {
         res.cookie('tms_token', token, {
             httpOnly: true,
             maxAge: 3 * 24 * 60 * 60 * 100,
-            domain: 'https://mern-tms.netlify.app',
-            secure: true,
-            sameSite: 'none'
+            secure: true
         });
 
         res.status(200).json({
