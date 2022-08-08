@@ -4,16 +4,12 @@ const express = require('express');
 const { connect } = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const dotenv = require('dotenv');
 const appRouter = require('./router');
 const errorHandlerMiddleware = require('./middleware/error');
 const config = require('./config/env');
 
 // INIT, Config, SETUP
 // ------------------------------------
-
-// dotenv configs
-dotenv.config();
 
 // init app
 const app = express();
