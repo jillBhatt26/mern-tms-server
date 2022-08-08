@@ -1,5 +1,6 @@
 // Requires
 // ------------------------------------
+require('dotenv/config');
 const express = require('express');
 const { connect } = require('mongoose');
 const cors = require('cors');
@@ -31,8 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 // cookie parser middleware
 app.use(cookieParser());
 
-const PORT = config.PORT;
 const DB_URL = config.DB_URL;
+const PORT = process.env.PORT || 5000;
 
 connect(DB_URL)
     .then(() => {
