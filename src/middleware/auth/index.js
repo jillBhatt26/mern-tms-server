@@ -6,6 +6,8 @@ const authMiddleware = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
         if (err) {
+            console.log('jwt verify error: ', err);
+
             return next({
                 status: 500,
                 message: err.message || 'Failed to authorize user!'
