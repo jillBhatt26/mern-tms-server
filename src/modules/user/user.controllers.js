@@ -137,7 +137,9 @@ const login = async (req, res, next) => {
         res.cookie('tms_token', token, {
             httpOnly: true,
             maxAge: 3 * 24 * 60 * 60 * 100,
-            domain: 'https://mern-tms.netlify.app'
+            domain: 'https://mern-tms.netlify.app',
+            secure: true,
+            sameSite: 'none'
         });
 
         res.status(200).json({
@@ -146,9 +148,7 @@ const login = async (req, res, next) => {
                 id: toLoginUser._id,
                 name: toLoginUser.name,
                 email: toLoginUser.email,
-                role: toLoginUser.role,
-                secure: true,
-                sameSite: 'none'
+                role: toLoginUser.role
             }
         });
     } catch (error) {
