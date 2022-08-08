@@ -28,6 +28,18 @@ app.use(
     })
 );
 
+// url parsing setup middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// cookie parser middleware
+app.use(
+    cookieParser({
+        secret: 'shhhhhhh!!',
+        secureProxy: true
+    })
+);
+
 // session
 app.use(
     session({
@@ -40,18 +52,6 @@ app.use(
         }
     })
 );
-
-// url parsing setup middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// cookie parser middleware
-// app.use(
-//     cookieParser({
-//         secret: 'shhhhhhh!!',
-//         secureProxy: true
-//     })
-// );
 
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
