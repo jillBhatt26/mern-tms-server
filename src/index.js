@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const appRouter = require('./router');
 const errorHandlerMiddleware = require('./middleware/error');
 const config = require('./config/env');
+const os = require('os');
 
 // INIT, Config, SETUP
 // ------------------------------------
@@ -35,11 +36,17 @@ app.use(express.urlencoded({ extended: true }));
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
 
+app.get('/', (_, res) => {
+    return res.json({ host: os.hostname() });
+});
+
 connect(DB_URL)
     .then(() => {
         app.listen(PORT, err => {
             if (err) throw err;
             else console.log(`🚀...Server live...🚀`);
+
+            console.log('current host: ', os.hostname());
         });
     })
     .catch(err => {
