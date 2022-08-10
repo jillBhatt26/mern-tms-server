@@ -1,11 +1,13 @@
 {
     "name": "server",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "src/index.js",
     "license": "MIT",
     "scripts": {
-        "start": "node src/index.js",
-        "dev": "nodemon src/index.js"
+        "start": "node src/index",
+        "dev": "nodemon -L src/index",
+        "compose:up": "docker-compose up --build",
+        "compose:down": "docker-compose down --rmi all -v"
     },
     "devDependencies": {
         "nodemon": "^2.0.19"
