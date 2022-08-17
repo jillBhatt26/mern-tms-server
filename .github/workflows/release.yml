@@ -11,5 +11,5 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - run: docker build -t jbsdevden/mern-tms-server .
-            - run: echo "${{secrets.D_HUB_MERN_TMS_SERVER_AT}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password stdin
+            - run: echo "${{secrets.D_HUB_MERN_TMS_SERVER_AT}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stdin
             - run: docker push jbsdevden/mern-tms-server
