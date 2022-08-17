@@ -8,16 +8,25 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
 
+        env:
+            DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+            DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
+
         steps:
             - uses: actions/checkout@v3
 
             - run: docker build -t jbsdevden/mern-tms-server .
 
+            # - name: Login to Docker Hub
+            #   uses: docker/login-action@v1
+            #   with:
+            #       username: ${{secrets.DOCKERHUB_USERNAME}}
+            #       password: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
+
             - name: Login to Docker Hub
               uses: docker/login-action@v1
               with:
-                  username: ${{secrets.DOCKERHUB_USERNAME}}
-                  password: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
+                  username: $DH_USERNAME
+                  password: $DH_PASSWORD
 
-            # - run: echo "${{secrets.D_HUB_MERN_TMS_SERVER_AT}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stdin
             - run: docker push jbsdevden/mern-tms-server
