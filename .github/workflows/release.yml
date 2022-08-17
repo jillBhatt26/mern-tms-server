@@ -4,13 +4,13 @@ on:
     push:
         branches: ['main']
 
+env:
+    DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+    DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
+
 jobs:
     deploy:
         runs-on: ubuntu-latest
-
-        env:
-            DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
-            DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
 
         steps:
             - uses: actions/checkout@v3
