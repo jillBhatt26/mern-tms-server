@@ -7,8 +7,7 @@
         "start": "node src/index",
         "dev": "nodemon -L src/index",
         "compose:up": "docker-compose up --build --scale server=3",
-        "compose:down": "docker-compose down --rmi all -v",
-        "test": "--passWithNoTests"
+        "compose:down": "docker-compose down --rmi all -v"
     },
     "devDependencies": {
         "nodemon": "^2.0.19"
