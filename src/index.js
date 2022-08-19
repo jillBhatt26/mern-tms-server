@@ -11,7 +11,7 @@ const config = require('./config/env');
 const os = require('os');
 
 // INIT, Config, SETUP
-// -----------------------------------
+// ------------------------------------
 
 // init app
 const app = express();
