@@ -1,6 +1,6 @@
 // Requires
 // ------------------------------------
-require('dotenv/config');
+const dotenv = require('dotenv');
 const express = require('express');
 const { connect } = require('mongoose');
 const cors = require('cors');
@@ -12,6 +12,8 @@ const config = require('./config/env');
 
 // INIT, Config, SETUP
 // ------------------------------------
+
+dotenv.config();
 
 // init app
 const app = express();
