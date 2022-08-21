@@ -1,6 +1,6 @@
 // Requires
 // ------------------------------------
-const dotenv = require('dotenv');
+require('dotenv/config');
 const express = require('express');
 const { connect } = require('mongoose');
 const cors = require('cors');
@@ -12,8 +12,6 @@ const config = require('./config/env');
 
 // INIT, Config, SETUP
 // ------------------------------------
-
-dotenv.config();
 
 // init app
 const app = express();
@@ -35,15 +33,12 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-console.log('config: ', config);
-console.log('PRO_DB_URL: ', process.env);
-
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
 
-// app.get('/', (_, res) => {
-//     return res.json({ host: os.hostname() });
-// });
+app.get('/', (_, res) => {
+    return res.json({ host: os.hostname() });
+});
 
 connect(DB_URL)
     .then(() => {
@@ -57,10 +52,6 @@ connect(DB_URL)
     .catch(err => {
         console.log(`Error connecting to mongodb: ${err.message}`);
     });
-
-app.get('/', (req, res) => {
-    return res.status(200).json({ msg: 'Welcome!!' });
-});
 
 app.use(appRouter);
 
