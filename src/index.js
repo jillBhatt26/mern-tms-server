@@ -35,6 +35,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+console.log('config: ', config);
+console.log('PRO_DB_URL: ', process.env.PRO_DB_URL);
+
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
 
