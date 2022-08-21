@@ -42,17 +42,18 @@ jobs:
             - name: Generate build
               run: npm run build --if-present
 
-            - name: Generate .env file
+            - name: Generate env file
               uses: SpicyPizza/create-envfile@v1.3.0
               with:
                   envkey_DEBUG: false
                   envkey_JWT_SECRET: ${{ env.JWT_SECRET }}
-                  envkey_NODE_ENV: ${{ env.NODE_ENV }}
-                  envkey_PRO_CLIENT_URL: ${{ env.PRO_CLIENT_URL }}
-                  envkey_PRO_DB_URL: ${{ env.PRO_DB_URL }}
-                  envkey_PRO_HOST: ${{ env.PRO_HOST }}
-                  envkey_PRO_PORT: ${{ env.PRO_PORT }}
+                  envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
+                  envkey_PRO_CLIENT_URL: ${{ secrets.PRO_CLIENT_URL }}
+                  envkey_PRO_DB_URL: ${{ secrets.PRO_DB_URL }}
+                  envkey_PRO_HOST: ${{ secrets.PRO_HOST }}
+                  envkey_PRO_PORT: ${{ secrets.PRO_PORT }}
                   file_name: .env
+                  fail_on_empty: false
 
             - name: Restart the server
               run: pm2 restart BackendAPI
