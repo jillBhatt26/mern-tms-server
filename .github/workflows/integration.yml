@@ -14,6 +14,16 @@ jobs:
             matrix:
                 node-version: [16.x]
 
+        env:
+            DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+            DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
+            JWT_SECRET: ${{ secrets.JWT_SECRET }}
+            NODE_ENV: ${{ secrets.NODE_ENV }}
+            PRO_CLIENT_URL: ${{ secrets.PRO_CLIENT_URL }}
+            PRO_DB_URL: ${{ secrets.PRO_DB_URL }}
+            PRO_HOST: ${{ secrets.PRO_HOST }}
+            PRO_PORT: ${{ secrets.PRO_PORT }}
+
         steps:
             - uses: actions/checkout@v3
 
@@ -32,22 +42,6 @@ jobs:
             - name: Generate build
               run: npm run build --if-present
 
-    env_gen:
-        runs-on: self-hosted
-
-        env:
-            DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
-            DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
-            JWT_SECRET: ${{ secrets.JWT_SECRET }}
-            NODE_ENV: ${{ secrets.NODE_ENV }}
-            PRO_CLIENT_URL: ${{ secrets.PRO_CLIENT_URL }}
-            PRO_DB_URL: ${{ secrets.PRO_DB_URL }}
-            PRO_HOST: ${{ secrets.PRO_HOST }}
-            PRO_PORT: ${{ secrets.PRO_PORT }}
-
-        steps:
-            - uses: actions/checkout@v3
-
             - name: Generate .env file
               uses: SpicyPizza/create-envfile@v1.3.0
               with:
@@ -60,15 +54,46 @@ jobs:
                   envkey_PRO_PORT: ${{ env.PRO_PORT }}
                   file_name: .env
 
-              # run: |
-              #     touch .env
-              #     echo JWT_SECRET = ${{ env.JWT_SECRET }} >> .env
-              #     echo NODE_ENV = ${{ env.NODE_ENV }} >> .env
-              #     echo PRO_CLIENT_URL = ${{ env.PRO_CLIENT_URL }} >> .env
-              #     echo PRO_DB_URL = ${{ env.PRO_DB_URL }} >> .env
-              #     echo PRO_HOST = ${{ env.PRO_HOST }} >> .env
-              #     echo PRO_PORT = ${{ env.PRO_PORT }} >> .env
-              #     cat .env
-
             - name: Restart the server
               run: pm2 restart BackendAPI
+
+    # env_gen:
+    #     runs-on: self-hosted
+
+    #     env:
+    #         DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+    #         DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
+    #         JWT_SECRET: ${{ secrets.JWT_SECRET }}
+    #         NODE_ENV: ${{ secrets.NODE_ENV }}
+    #         PRO_CLIENT_URL: ${{ secrets.PRO_CLIENT_URL }}
+    #         PRO_DB_URL: ${{ secrets.PRO_DB_URL }}
+    #         PRO_HOST: ${{ secrets.PRO_HOST }}
+    #         PRO_PORT: ${{ secrets.PRO_PORT }}
+
+    #     steps:
+    #         - uses: actions/checkout@v3
+
+    #         - name: Generate .env file
+    #           uses: SpicyPizza/create-envfile@v1.3.0
+    #           with:
+    #               envkey_DEBUG: false
+    #               envkey_JWT_SECRET: ${{ env.JWT_SECRET }}
+    #               envkey_NODE_ENV: ${{ env.NODE_ENV }}
+    #               envkey_PRO_CLIENT_URL: ${{ env.PRO_CLIENT_URL }}
+    #               envkey_PRO_DB_URL: ${{ env.PRO_DB_URL }}
+    #               envkey_PRO_HOST: ${{ env.PRO_HOST }}
+    #               envkey_PRO_PORT: ${{ env.PRO_PORT }}
+    #               file_name: .env
+
+    # run: |
+    #     touch .env
+    #     echo JWT_SECRET = ${{ env.JWT_SECRET }} >> .env
+    #     echo NODE_ENV = ${{ env.NODE_ENV }} >> .env
+    #     echo PRO_CLIENT_URL = ${{ env.PRO_CLIENT_URL }} >> .env
+    #     echo PRO_DB_URL = ${{ env.PRO_DB_URL }} >> .env
+    #     echo PRO_HOST = ${{ env.PRO_HOST }} >> .env
+    #     echo PRO_PORT = ${{ env.PRO_PORT }} >> .env
+    #     cat .env
+
+    # - name: Restart the server
+    #   run: pm2 restart BackendAPI
