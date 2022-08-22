@@ -75,7 +75,7 @@ jobs:
                   echo JWT_SECRET = ${{ env.JWT_SECRET }} >> .env
                   echo NODE_ENV = ${{ env.NODE_ENV }} >> .env
                   echo PRO_CLIENT_URL = ${{ env.PRO_CLIENT_URL }} >> .env
-                  echo PRO_DB_URL = mongodb+srv://${{secrets.MONGO_USERNAME}}:${{secrets.MONGO_PASSWORD}}@practice.tdza6.mongodb.net/mern-tms?retryWrites=true&w=majority >> .env
+                  echo PRO_DB_URL = "mongodb+srv://${{secrets.MONGO_USERNAME}}:${{secrets.MONGO_PASSWORD}}@practice.tdza6.mongodb.net/mern-tms?retryWrites=true&w=majority" >> .env
                   echo PRO_HOST = ${{ env.PRO_HOST }} >> .env
                   echo PRO_PORT = ${{ env.PRO_PORT }} >> .env
                   cat .env
