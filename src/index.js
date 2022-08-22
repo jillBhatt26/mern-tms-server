@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
 
-console.log('db url: ', process.env.PRO_DB_URL);
+console.log('port: ', PORT);
 
 app.get('/', (_, res) => {
     return res.json({ host: os.hostname() });
