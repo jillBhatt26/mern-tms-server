@@ -45,8 +45,9 @@ app.get('/', (_, res) => {
 connect(DB_URL)
     .then(() => {
         app.listen(PORT, err => {
-            if (err) throw err;
-            else console.log(`🚀....Server live....🚀`);
+            if (err) {
+                console.log('Listen error: ', err);
+            } else console.log(`🚀....Server live....🚀`);
 
             console.log('current host: ', os.hostname());
         });
