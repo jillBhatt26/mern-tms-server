@@ -56,6 +56,6 @@ connect(DB_URL)
         console.log(`Error connecting to mongodb: ${err.message}`);
     });
 
-app.use('/api', appRouter);
+app.use(appRouter);
 
 app.use(errorHandlerMiddleware);
