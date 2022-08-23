@@ -81,7 +81,7 @@ jobs:
                   cat .env
 
             - name: Restart the server
-              run: pm2 restart BackendAPI
+              run: pm2 restart api
 
     # env_gen:
     #     runs-on: self-hosted
