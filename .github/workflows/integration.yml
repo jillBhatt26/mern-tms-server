@@ -80,8 +80,11 @@ jobs:
                   echo PRO_PORT = ${{ env.PRO_PORT }} >> .env
                   cat .env
 
+            # - name: Restart the server
+            #   run: pm2 restart api
+
             - name: Restart the server
-              run: pm2 restart api
+              run: pm2 restart pm2.processes.yml
 
     # env_gen:
     #     runs-on: self-hosted

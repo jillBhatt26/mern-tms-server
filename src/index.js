@@ -36,9 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 const DB_URL = config.DB_URL;
 const PORT = process.env.PORT || 5000;
 
-console.log('port: ', PORT);
-
-app.get('/', (_, res) => {
+app.get('/api', (_, res) => {
     return res.json({ host: os.hostname() });
 });
 
@@ -56,6 +54,6 @@ connect(DB_URL)
         console.log(`Error connecting to mongodb: ${err.message}`);
     });
 
-app.use(appRouter);
+app.use('/api', appRouter);
 
 app.use(errorHandlerMiddleware);
