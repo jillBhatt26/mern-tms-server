@@ -8,7 +8,7 @@ const router = Router();
 
 router.get('/', authMiddleware, activeUser);
 
-router.post('/create', create);
+router.post('/create', authMiddleware, create);
 
 router.post('/login', login);
 

@@ -57,3 +57,9 @@ connect(DB_URL)
 app.use('/api', appRouter);
 
 app.use(errorHandlerMiddleware);
+
+app.use('*', (req, res) => {
+    return res.status(404).json({
+        message: 'No route found'
+    });
+});
