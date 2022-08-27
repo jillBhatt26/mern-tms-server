@@ -83,8 +83,8 @@ jobs:
             # - name: Restart the server
             #   run: pm2 restart api
 
-            # - name: Restart the server
-            #   run: pm2 start pm2.processes.yml
+            - name: Restart the server
+              run: pm2 start pm2.processes.yml
 
     # env_gen:
     #     runs-on: self-hosted

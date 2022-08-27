@@ -1,7 +1,7 @@
 apps:
     - script: './src/index.js'
       exec_mode: 'fork'
-      name: 'api'
+      name: 'mern-tms-api'
       env:
           PORT: 5000
           NODE_ENV: production
