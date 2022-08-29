@@ -95,7 +95,7 @@ jobs:
     #     env:
     #         DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
     #         DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
-    #         JWT_SECRET: ${{ secrets.JWT_SECRET }}
+    #         JWT_SECRET: ${{ secrets.JWT_SECRET}}
     #         NODE_ENV: ${{ secrets.NODE_ENV }}
     #         PRO_CLIENT_URL: ${{ secrets.PRO_CLIENT_URL }}
     #         PRO_DB_URL: ${{ secrets.PRO_DB_URL }}
