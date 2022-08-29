@@ -10,11 +10,11 @@ services:
             - ./:/app
             - /app/node_modules
 
-    # nginx:
-    #     image: nginx:latest
-    #     volumes:
-    #         - ./nginx/conf.d:/etc/nginx/conf.d
-    #     depends_on:
-    #         - server
-    #     ports:
-    #         - '5000:5000'
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./nginx/conf.d:/etc/nginx/conf.d
+        depends_on:
+            - server
+        ports:
+            - '5000:5000'

@@ -13,7 +13,7 @@ on:
 jobs:
     deploy:
         if: github.event.workflow_run.conclusion == 'success'
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
 
         env:
             DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
@@ -22,12 +22,14 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - run: docker build -t jbsdevden/mern-tms-server .
+            - name: Build the production server image and start the container
+              run: npm run compose:up
+            #   run: docker build -t jbsdevden/mern-tms-server .
 
-            - name: Login to Docker Hub
-              uses: docker/login-action@v1
-              with:
-                  username: ${{env.DH_USERNAME}}
-                  password: ${{env.DH_PASSWORD}}
+            # - name: Login to Docker Hub
+            #   uses: docker/login-action@v1
+            #   with:
+            #       username: ${{env.DH_USERNAME}}
+            #       password: ${{env.DH_PASSWORD}}
 
-            - run: docker push jbsdevden/mern-tms-server
+            # - run: docker push jbsdevden/mern-tms-server
