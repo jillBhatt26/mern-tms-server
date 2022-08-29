@@ -80,11 +80,14 @@ jobs:
                   echo PRO_PORT = ${{ env.PRO_PORT }} >> .env
                   cat .env
 
+            - name: Build the production server image and start the container
+              run: npm run compose:up
+
             # - name: Restart the server
             #   run: pm2 restart api
 
-            - name: Restart the server
-              run: pm2 start pm2.processes.yml
+            # - name: Restart the server
+            #   run: pm2 start pm2.processes.yml
 
     # env_gen:
     #     runs-on: self-hosted
