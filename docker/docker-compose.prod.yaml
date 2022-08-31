@@ -4,7 +4,7 @@ services:
         build:
             context: ../
             dockerfile: ./docker/docker-compose.prod.yaml
-        image: jbsdevden/mern-tms-server:${GITHUB_SHA}
+        image: 'jbsdevden/mern-tms-server:${GITHUB_SHA}'
         # container_name: c_tms_server
         # ports:
         #     - '5000:5000'
