@@ -15,6 +15,7 @@ services:
         image: nginx:alpine
         build:
             context: ../
+            dockerfile: ./docker/Dockerfile.prod
         volumes:
             - ../nginx/conf.d:/etc/nginx/conf.d
         depends_on:
