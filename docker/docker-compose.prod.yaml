@@ -3,22 +3,10 @@ services:
     server:
         build:
             context: ../
-            dockerfile: ./docker/docker-compose.prod.yaml
+            dockerfile: ./docker/Dockerfile.prod
         image: 'jbsdevden/mern-tms-server:${GITHUB_SHA}'
-        # container_name: c_tms_server
-        # ports:
-        #     - '5000:5000'
         volumes:
             - ../:/app
             - /app/node_modules
         env_file:
             - ../.env
-
-    # nginx:
-    #     image: nginx:latest
-    #     volumes:
-    #         - ./nginx/conf.d:/etc/nginx/conf.d
-    #     depends_on:
-    #         - server
-    #     ports:
-    #         - '5000:5000'
