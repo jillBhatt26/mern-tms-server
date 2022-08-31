@@ -1,7 +1,10 @@
-server {
-    listen 5000;
+upstream my-app {
+    server 172.17.0.1:5000 weight=1;
+    server 172.17.0.1:5000 weight=1;
+}
 
-    location /api {
-        proxy_pass http://server:5000/api;
+server {
+    location / {
+        proxy_pass http://my-app;
     }
 }
