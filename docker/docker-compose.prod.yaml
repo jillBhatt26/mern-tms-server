@@ -13,6 +13,8 @@ services:
 
     nginx:
         image: nginx:alpine
+        build:
+            context: ../
         volumes:
             - ../nginx/conf.d:/etc/nginx/conf.d
         depends_on:
