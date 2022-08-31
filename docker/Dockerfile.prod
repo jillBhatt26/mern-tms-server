@@ -13,7 +13,7 @@ EXPOSE 5000
 
 # NOTE: Use the run command to build the folder while building the image and not the container
 # RUN npm run build
-RUN npm run start
+# RUN npm run start
 
 
 FROM nginx:alpine
