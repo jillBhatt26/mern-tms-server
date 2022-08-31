@@ -16,7 +16,7 @@ EXPOSE 5000
 CMD npm run start
 # CMD ["yarn", "run", "start"]
 
-FROM nginx:alpine
-COPY ../nginx/conf.d /etc/nginx/conf.d
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# FROM nginx:alpine
+# COPY /nginx/conf.d /etc/nginx/conf.d
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
