@@ -6,14 +6,15 @@
     "scripts": {
         "start": "node src/index",
         "dev": "nodemon -L src/index",
-        "compose:up": "docker-compose up --build",
-        "compose:down": "docker-compose down --rmi all -v"
+        "compose:up:dev": "docker-compose -f ./docker/docker-compose.dev.yaml up --build",
+        "compose:up:prod": "docker-compose -f ./docker/docker-compose.dev.yaml up --build --scale server=3",
+        "compose:down": "cd ./docker && docker-compose down --rmi all -v --remove-orphans"
     },
     "devDependencies": {
         "nodemon": "^2.0.19"
     },
     "dependencies": {
-        "bcrypt": "^5.0.1",
+        "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "dotenv": "^16.0.1",

@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+    server:
+        build:
+            context: ../
+            dockerfile: ./docker/Dockerfile.dev
+        image: jbsdevden/mern-tms-server
+        container_name: c_tms_server
+        ports:
+            - '5000:5000'
+        volumes:
+            - ../:/app
+            - /app/node_modules
+
+        env_file:
+            - ../.env

@@ -2,7 +2,7 @@ const isEmail = require('validator/lib/isEmail');
 
 const User = require('./user.model');
 
-const { genSalt, hash, compare } = require('bcrypt');
+const { genSalt, hash, compare } = require('bcryptjs');
 
 const createToken = require('../../functions/createToken');
 
