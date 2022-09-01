@@ -1,7 +1,52 @@
-server {
-    listen 5000;
+user  nginx;
+worker_processes  1;
 
-    location / {
-        proxy_pass http://server:5000;
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+
+   upstream nginx {
+        server service1:3001;
+        server service2:3001;
+        server service3:3001;
+        server service4:3001;
+        server service5:3001;
     }
+
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+    server { 
+      location /http {
+        proxy_pass http://nginx;
+      }
+
+      location /websocket {
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_pass "http://nginx";
+      }
+    }
+
+    #gzip  on;
+
+    #include /etc/nginx/conf.d/*.conf;
 }
