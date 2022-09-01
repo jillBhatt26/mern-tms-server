@@ -12,13 +12,15 @@ events {
 
 http {
 
-    upstream nginx {
-        server service1:5000;
-        server service2:5000;
-        server service3:5000;
-        server service4:5000;
-        server service5:5000;
-    }
+    listen 5000;
+
+    #upstream nginx {
+    #    server server:5000;
+    #    server server:5000;
+    #    server server:5000;
+    #    server server:5000;
+    #    server server:5000;
+    #}
 
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
@@ -35,15 +37,15 @@ http {
     keepalive_timeout  65;
 
     server { 
-        location /http {
-            proxy_pass http://nginx;
+        location / {
+            proxy_pass http://server;
         }
 
         location /websocket {
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "upgrade";
-            proxy_pass "http://nginx";
+            proxy_pass "http://server";
         }
     }
 
