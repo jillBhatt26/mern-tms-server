@@ -38,7 +38,7 @@ http {
 
     server { 
         location / {
-            proxy_pass http://server;
+            proxy_pass http://server:5000;
         }
 
         location /websocket {
