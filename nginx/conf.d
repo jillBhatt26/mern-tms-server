@@ -12,12 +12,12 @@ events {
 
 http {
 
-   upstream nginx {
-        server service1:3001;
-        server service2:3001;
-        server service3:3001;
-        server service4:3001;
-        server service5:3001;
+    upstream nginx {
+        server service1:5000;
+        server service2:5000;
+        server service3:5000;
+        server service4:5000;
+        server service5:5000;
     }
 
     include       /etc/nginx/mime.types;
@@ -33,17 +33,18 @@ http {
     #tcp_nopush     on;
 
     keepalive_timeout  65;
-    server { 
-      location /http {
-        proxy_pass http://nginx;
-      }
 
-      location /websocket {
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_pass "http://nginx";
-      }
+    server { 
+        location /http {
+            proxy_pass http://nginx;
+        }
+
+        location /websocket {
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_pass "http://nginx";
+        }
     }
 
     #gzip  on;
