@@ -9,7 +9,7 @@ RUN yarn install
 
 COPY ./ ./
 
-EXPOSE 5000
+EXPOSE 80 443
 
 # NOTE: Use the run command to build the folder while building the image and not the container
 # RUN npm run build 
