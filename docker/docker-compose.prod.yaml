@@ -17,7 +17,7 @@ services:
             context: ../
             dockerfile: ./docker/Dockerfile.prod
         volumes:
-            - ../nginx/conf.d:/etc/nginx/conf.d
+            - ../nginx/nginx.conf:/etc/nginx/nginx.conf
         depends_on:
             - server
         ports:
