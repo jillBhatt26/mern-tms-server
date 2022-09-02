@@ -15,5 +15,5 @@ CMD ["yarn", "run", "start"]
 
 
 
-FROM nginx:alpine
-COPY ../nginx/nginx.conf /etc/nginx/nginx.conf
+# FROM nginx:alpine
+# COPY ../nginx/nginx.conf /etc/nginx/nginx.conf
