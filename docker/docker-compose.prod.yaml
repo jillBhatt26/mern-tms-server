@@ -22,8 +22,6 @@ services:
             - server
         ports:
             - 5000:5000
-        # expose:
-        #     - 80
 
     # nginx:
     #     image: nginx:alpine
