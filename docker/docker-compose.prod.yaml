@@ -23,11 +23,11 @@ services:
     #     ports:
     #         - '5000:5000'
 
-    nginx:
-        image: nginx:alpine
-        volumes:
-            - ../nginx/nginx.conf:/etc/nginx/nginx.conf
-        depends_on:
-            - server
-        ports:
-            - 5000:5000
+    # nginx:
+    #     image: nginx:alpine
+    #     volumes:
+    #         - ../nginx/nginx.conf:/etc/nginx/nginx.conf
+    #     depends_on:
+    #         - server
+    #     ports:
+    #         - 5000:5000f
