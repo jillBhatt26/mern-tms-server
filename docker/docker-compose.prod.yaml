@@ -21,7 +21,7 @@ services:
         depends_on:
             - server
         ports:
-            - 5000:5000
+            - 5000:80
         expose:
             - 80
 
