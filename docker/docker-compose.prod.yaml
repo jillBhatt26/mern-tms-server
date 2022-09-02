@@ -23,4 +23,4 @@ services:
         depends_on:
             - server
         ports:
-            - 80:5000
+            - 8080:5000
