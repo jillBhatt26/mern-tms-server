@@ -1,3 +1,6 @@
+FROM nginx:alpine
+COPY /nginx/nginx.conf /etc/nginx/nginx.conf
+
 FROM node:16.16.0-alpine
 
 RUN yarn global add nodemon
@@ -15,5 +18,3 @@ EXPOSE 5000
 
 CMD ["yarn", "run", "dev"]
 
-FROM nginx:alpine
-COPY /nginx/nginx.conf /etc/nginx/nginx.conf
