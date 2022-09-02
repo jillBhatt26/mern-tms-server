@@ -9,11 +9,15 @@ RUN yarn install
 
 COPY ./ ./
 
-EXPOSE 80 443
+EXPOSE 5000
+
+CMD ["yarn", "run", "dev"]
+
+# EXPOSE 80 443
 
 # NOTE: Use the run command to build the folder while building the image and not the container
 # RUN npm run build 
-CMD npm run start
+# CMD npm run start
 # CMD ["yarn", "run", "start"]
 
 # FROM nginx:alpine
