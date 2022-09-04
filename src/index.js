@@ -19,8 +19,6 @@ const app = express();
 // cookie parser middleware
 app.use(cookieParser());
 
-console.log('config: ', config);
-
 // cors middleware
 app.use(
     cors({
