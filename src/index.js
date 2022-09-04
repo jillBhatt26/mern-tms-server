@@ -19,7 +19,7 @@ const app = express();
 // cookie parser middleware
 app.use(cookieParser());
 
-console.log('client url: ', config.CLIENT_URL);
+console.log('config: ', config);
 
 // cors middleware
 app.use(
