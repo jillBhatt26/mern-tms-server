@@ -24,7 +24,7 @@ console.log('config: ', config);
 // cors middleware
 app.use(
     cors({
-        origin: [config.CLIENT_URL],
+        origin: config.CLIENT_URL,
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
         allowedHeaders: ['Content-Type']
