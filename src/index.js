@@ -36,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const DB_URL = config.DB_URL;
-const PORT = process.env.PORT || 5000;
+const PORT = config.PORT || 5000;
 
 app.get('/api', (_, res) => {
     return res.json({ host: os.hostname() });
