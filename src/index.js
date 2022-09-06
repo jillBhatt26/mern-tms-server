@@ -40,9 +40,12 @@ app.get('/api', (_, res) => {
     return res.json({ host: os.hostname() });
 });
 
-connect(DB_URL)
+// connect(DB_URL)
+connect(process.env.PRO_DB_URL)
     .then(() => {
         app.listen(PORT, err => {
+            console.log('port: ', PORT);
+
             if (err) {
                 console.log('Listen error: ', err);
             } else console.log(`🚀....Server live....🚀`);
