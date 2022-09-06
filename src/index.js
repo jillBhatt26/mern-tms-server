@@ -48,7 +48,7 @@ connect(process.env.PRO_DB_URL)
 
             if (err) {
                 console.log('Listen error: ', err);
-            } else console.log(`🚀....Server live....🚀`);
+            } else console.log(`🚀.....Server live.....🚀`);
 
             console.log('current host: ', os.hostname());
         });
