@@ -8,8 +8,8 @@ services:
         volumes:
             - ../:/app
             - /app/node_modules
-        # ports:
-        #     - 5001:5000
+        ports:
+            - 5001:5000
         env_file:
             - ../.env
 
