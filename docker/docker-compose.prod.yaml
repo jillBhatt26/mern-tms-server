@@ -5,13 +5,12 @@ services:
             context: ../
             dockerfile: ./docker/Dockerfile.prod
         image: 'jbsdevden/mern-tms-server:${GITHUB_SHA}'
+        container_name: server
         volumes:
             - ../:/app
             - /app/node_modules
         ports:
             - 5001:5001
-        # expose:
-        #     - 5001
         env_file:
             - ../.env
 
