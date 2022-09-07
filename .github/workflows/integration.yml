@@ -58,6 +58,9 @@ jobs:
             # - name: Restart the server
             #   run: pm2 start pm2.processes.yml
 
+            - name: Build the production server image and start the container without new updates
+              run: npm run compose:up:prod --no-recreate
+
             - name: Build the production server image and start the container
               run: npm run compose:up:prod
 
