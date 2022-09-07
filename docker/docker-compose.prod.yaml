@@ -20,7 +20,7 @@ services:
         volumes:
             - ../nginx/conf.d:/etc/nginx/conf.d
         # depends_on:
-        #     - server
+        #     - server_1
         ports:
             - 5001:80
 
