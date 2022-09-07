@@ -37,10 +37,6 @@ const DB_URL = config.DB_URL;
 const PORT = config.PORT || 5000;
 
 app.get('/api', (_, res) => {
-    if (process.env.NODE_ENV.toLowerCase() === 'production') {
-        return res.redirect('/');
-    }
-
     return res.json({ host: os.hostname() });
 });
 
