@@ -19,8 +19,8 @@ services:
         image: nginx:alpine
         volumes:
             - ../nginx/conf.d:/etc/nginx/conf.d
-        depends_on:
-            - server
+        # depends_on:
+        #     - server
         ports:
             - 5001:80
 
