@@ -12,7 +12,6 @@ COPY ./ ./
 EXPOSE 5001
 
 CMD ["yarn", "run", "start"]
-# RUN yarn run start
 
 
 
