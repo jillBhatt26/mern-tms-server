@@ -4,7 +4,6 @@ services:
         build:
             context: ../
             dockerfile: ./docker/Dockerfile.prod
-        stop_signal: SIGINT
         image: 'jbsdevden/mern-tms-server:${GITHUB_SHA}'
         # container_name : server
         restart: unless-stopped
@@ -12,9 +11,7 @@ services:
             - ../:/app
             - /app/node_modules
             - ../nginx/conf.d:/etc/nginx/conf.d
-        deploy:
-            mode: replicated
-            replicas: 3
+
         # ports:
         #     - 5001:5001
         # depends_on:
@@ -25,7 +22,6 @@ services:
 
     nginx:
         image: nginx:alpine
-        stop_signal: SIGINT
         volumes:
             - ../nginx/conf.d:/etc/nginx/conf.d
         command: nginx -g "daemon off;"
