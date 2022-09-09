@@ -16,7 +16,7 @@ services:
         #     - 5001:5001
         # depends_on:
         #     - nginx
-        ## tty: true
+        # tty: true
         env_file:
             - ../.env
 
