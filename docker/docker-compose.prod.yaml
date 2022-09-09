@@ -4,6 +4,7 @@ services:
         build:
             context: ../
             dockerfile: ./docker/Dockerfile.prod
+        stop_signal: SIGINT
         image: 'jbsdevden/mern-tms-server:${GITHUB_SHA}'
         # container_name : server
         restart: unless-stopped
