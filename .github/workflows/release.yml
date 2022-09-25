@@ -53,4 +53,4 @@ jobs:
 
             - name: Push the images to docker hub
               #   run: docker push jbsdevden/mern-tms-server
-              run: docker compose push
+              run: yarn run compose:push
