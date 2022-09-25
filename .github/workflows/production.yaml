@@ -1,22 +1,59 @@
-name: Integration
-
-# # on:
-# #     push:
-# #         branches: ['main']
-# #     pull_request:
-# #         branches: ['main']
-
-# name: Processes
+name: Production
 
 on:
-    workflow_run:
-        workflows: ['Release']
-        types:
-            - completed
+    push:
+        branches: ['main']
 
 jobs:
-    build:
-        if: github.event.workflow_run.conclusion == 'success'
+    release:
+        runs-on: ubuntu-latest
+
+        env:
+            DH_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+            DH_PASSWORD: ${{secrets.D_HUB_MERN_TMS_SERVER_AT}}
+            JWT_SECRET: ${{ secrets.JWT_SECRET }}
+            NODE_ENV: ${{ secrets.NODE_ENV }}
+            PRO_CLIENT_URL: ${{ secrets.PRO_CLIENT_URL }}
+            PRO_DB_URL: ${{ secrets.PRO_DB_URL }}
+            PRO_HOST: ${{ secrets.PRO_HOST }}
+            PRO_PORT: ${{ secrets.PRO_PORT }}
+            MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
+            MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Generate env file
+              run: |
+                  touch .env
+                  echo JWT_SECRET = ${{ env.JWT_SECRET }} >> .env
+                  echo NODE_ENV = ${{ env.NODE_ENV }} >> .env
+                  echo PRO_CLIENT_URL = ${{ env.PRO_CLIENT_URL }} >> .env
+                  echo PRO_DB_URL = "mongodb+srv://${{secrets.MONGO_USERNAME}}:${{secrets.MONGO_PASSWORD}}@practice.tdza6.mongodb.net/mern-tms?retryWrites=true&w=majority" >> .env
+                  echo PRO_HOST = ${{ env.PRO_HOST }} >> .env
+                  echo PRO_PORT = ${{ env.PRO_PORT }} >> .env
+                  cat .env
+
+            - name: Build the images using the compose file
+              run: yarn run compose:build:prod
+
+            - name: Set outputs
+              id: vars
+              run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+            - name: Check outputs
+              run: echo ${{ steps.vars.outputs.sha_short }}
+
+            - name: Login to Docker Hub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{env.DH_USERNAME}}
+                  password: ${{env.DH_PASSWORD}}
+
+            - name: Push the images to docker hub
+              run: yarn run compose:push
+
+    deploy:
         runs-on: self-hosted
 
         strategy:
@@ -64,26 +101,11 @@ jobs:
                   echo PRO_PORT = ${{ env.PRO_PORT }} >> .env
                   cat .env
 
-            # - name: Restart the server
-            #   run: pm2 start pm2.processes.yml
-
             - name: Pull the server service from docker hub
               run: npm run compose:pull
 
             - name: Build the production server image and start the container
               run: npm run compose:up:prod
-
-            # - name: Remove none tagged images
-            #   run: docker images | grep "<none>" | awk '{print $3}' |xargs docker rmi -f
-
-            # - name: Remove all images that is not being used by any running container
-            #   run: docker images  --format {{.Repository}}:{{.Tag}} | grep -vFf <(docker ps --format {{.Image}}) |xargs docker rmi -f
-
-            # - name: Remove all images that is not being used by any running container
-            #   run: if [ ! -z "$(docker images --format {{.Repository}}:{{.Tag}} | grep -vFf <(docker ps --format {{.Image}}))" ]; then docker images --format {{.Repository}}:{{.Tag}} | grep -vFf <(docker ps --format {{.Image}}) |xargs docker rmi -f; else echo "No unused images found!"; fi
-
-            # - name: Remove none tagged images
-            #   run: if [ ! -z "$(docker images | grep "<none>" | awk  '{print $3}')" ]; then docker images | grep "<none>" | awk '{print $3}' |xargs docker rmi -f; else echo "No <none> images found"; fi
 
             - name: Remove all images that is not being used by any running container
               run: docker image prune -a -f
