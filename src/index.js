@@ -37,7 +37,7 @@ const DB_URL = config.DB_URL;
 const PORT = config.PORT || 5000;
 
 app.get('/api', (_, res) => {
-    return res.json({ host: os.hostname() });
+    return res.json({ host: os.hostname(), hello: 'world!!' });
 });
 
 // connect(DB_URL)
