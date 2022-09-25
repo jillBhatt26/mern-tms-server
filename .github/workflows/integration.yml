@@ -1,13 +1,22 @@
-name: Integration
+# name: Integration
+
+# # on:
+# #     push:
+# #         branches: ['main']
+# #     pull_request:
+# #         branches: ['main']
+
+name: Processes
 
 on:
-    push:
-        branches: ['main']
-    pull_request:
-        branches: ['main']
+    workflow_run:
+        workflows: ['Release']
+        types:
+            - completed
 
 jobs:
     build:
+        if: github.event.workflow_run.conclusion == 'success'
         runs-on: self-hosted
 
         strategy:
