@@ -9,7 +9,8 @@
         "compose:up:dev": "docker-compose -f ./docker/docker-compose.dev.yaml up --build",
         "compose:up:prod": "GITHUB_SHA=$(git rev-parse --short HEAD) docker-compose -f ./docker/docker-compose.prod.yaml up -d --scale server=3",
         "compose:down": "cd ./docker && docker-compose down --rmi all -v --remove-orphans",
-        "compose:build:prod": "GITHUB_SHA=$(git rev-parse --short HEAD) docker-compose -f ./docker/docker-compose.prod.yaml build"
+        "compose:build:prod": "GITHUB_SHA=$(git rev-parse --short HEAD) docker-compose -f ./docker/docker-compose.prod.yaml build",
+        "compose:push": "docker compose push -f ./docker/docker-compose.prod.yaml"
     },
     "devDependencies": {
         "nodemon": "^2.0.19"
